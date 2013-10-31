@@ -49,7 +49,7 @@ def parse_distutils_request(request):
     versus \n\n (what distutils is sending). 
     """
     try:
-        sep = request.raw_post_data.splitlines()[1]
+        sep = request.body.splitlines()[1]
     except:
         raise ValueError('Invalid post data')
 
@@ -59,7 +59,7 @@ def parse_distutils_request(request):
     except Exception, e:
         pass
     
-    for part in filter(lambda e: e.strip(), request.raw_post_data.split(sep)):
+    for part in filter(lambda e: e.strip(), request.body.split(sep)):
         try:
             header, content = part.lstrip().split('\n',1)
         except Exception, e:
